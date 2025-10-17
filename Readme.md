@@ -1,11 +1,5 @@
 
 
-# Laravel 12-ready Core Schema for Research/Chat App
-
-> **Note:** The following schema is not standard Markdown, but a DSL for describing the database structure. For better readability and rendering on GitHub, the schema is visualized as a diagram below.
-
-Vector embeddings are stored externally (n8n). Only IDs and metadata are stored in the database.
-
 ```mermaid
 erDiagram
   USERS {
