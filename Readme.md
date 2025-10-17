@@ -1,13 +1,111 @@
 
-# Laravel 12-ready Core Schema für Research/Chat App
 
-> **Hinweis:** Das folgende Schema ist kein Standard-Markdown, sondern eine DSL zur Beschreibung der Datenbankstruktur. Um die Lesbarkeit und Darstellung auf GitHub zu verbessern, ist das gesamte Schema in einen Codeblock gesetzt.
+# Laravel 12-ready Core Schema for Research/Chat App
 
-Vector embeddings werden extern (n8n) gespeichert. In der Datenbank werden nur IDs und Metadaten abgelegt.
+> **Note:** The following schema is not standard Markdown, but a DSL for describing the database structure. For better readability and rendering on GitHub, the schema is visualized as a diagram below.
 
-```plaintext
-//// Laravel 12-ready core schema for a research/chat app
-//// Vector embeddings live externally (n8n). We store only IDs + metadata.
+Vector embeddings are stored externally (n8n). Only IDs and metadata are stored in the database.
+
+```mermaid
+erDiagram
+  USERS {
+    bigint id PK "auto increment"
+    varchar name
+    varchar email "unique, not null"
+    timestamp email_verified_at
+    varchar password "not null"
+    varchar remember_token
+    timestamp created_at
+    timestamp updated_at
+    timestamp deleted_at
+  }
+  PERSONAL_ACCESS_TOKENS {
+    bigint id PK "auto increment"
+    varchar tokenable_type "not null"
+    bigint tokenable_id "not null"
+    varchar name "not null"
+    varchar token "unique, not null"
+    text abilities
+    timestamp last_used_at
+    timestamp expires_at
+    timestamp created_at
+    timestamp updated_at
+  }
+  PASSWORD_RESET_TOKENS {
+    varchar email PK
+    varchar token "not null"
+    timestamp created_at
+  }
+  PROBLEMS {
+    uuid id PK
+    bigint user_id FK
+    varchar title "not null"
+    text description
+    varchar status "not null, default: open"
+    timestamp created_at
+    timestamp updated_at
+    timestamp deleted_at
+  }
+  RESEARCHES {
+    uuid id PK
+    uuid problem_id FK
+    varchar vector_store_kind "not null, default: n8n"
+    varchar vector_store_ref "not null"
+    varchar vector_version
+    int source_count "not null, default: 0"
+    text notes
+    timestamp created_at
+    timestamp updated_at
+    timestamp deleted_at
+  }
+  CHAT_SESSIONS {
+    bigint id PK "auto increment"
+    bigint user_id FK
+    uuid problem_id FK
+    varchar title
+    json metadata
+    timestamp created_at
+    timestamp updated_at
+    timestamp deleted_at
+  }
+  CHAT_MESSAGES {
+    bigint id PK "auto increment"
+    bigint chat_session_id FK
+    bigint user_id FK
+    varchar role "not null"
+    text content "not null"
+    varchar tool_name
+    json metadata
+    timestamp created_at
+    timestamp updated_at
+  }
+  MESSAGE_RESEARCH_CITATIONS {
+    bigint id PK "auto increment"
+    bigint message_id FK
+    uuid research_id FK
+    varchar note
+    timestamp created_at
+  }
+  CHAT_SESSION_RESEARCH_PREFS {
+    bigint id PK "auto increment"
+    bigint chat_session_id FK
+    uuid research_id FK
+    int priority "not null, default: 0"
+    timestamp created_at
+    timestamp updated_at
+  }
+
+  USERS ||--o{ PROBLEMS : "user_id"
+  PROBLEMS ||--o{ RESEARCHES : "problem_id"
+  USERS ||--o{ CHAT_SESSIONS : "user_id"
+  PROBLEMS ||--o{ CHAT_SESSIONS : "problem_id"
+  CHAT_SESSIONS ||--o{ CHAT_MESSAGES : "chat_session_id"
+  USERS ||--o{ CHAT_MESSAGES : "user_id"
+  CHAT_MESSAGES ||--o{ MESSAGE_RESEARCH_CITATIONS : "message_id"
+  RESEARCHES ||--o{ MESSAGE_RESEARCH_CITATIONS : "research_id"
+  CHAT_SESSIONS ||--o{ CHAT_SESSION_RESEARCH_PREFS : "chat_session_id"
+  RESEARCHES ||--o{ CHAT_SESSION_RESEARCH_PREFS : "research_id"
+```
 
 //// ---------------------------
 //// Enums
