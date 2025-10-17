@@ -1,3 +1,11 @@
+
+# Laravel 12-ready Core Schema für Research/Chat App
+
+> **Hinweis:** Das folgende Schema ist kein Standard-Markdown, sondern eine DSL zur Beschreibung der Datenbankstruktur. Um die Lesbarkeit und Darstellung auf GitHub zu verbessern, ist das gesamte Schema in einen Codeblock gesetzt.
+
+Vector embeddings werden extern (n8n) gespeichert. In der Datenbank werden nur IDs und Metadaten abgelegt.
+
+```plaintext
 //// Laravel 12-ready core schema for a research/chat app
 //// Vector embeddings live externally (n8n). We store only IDs + metadata.
 
