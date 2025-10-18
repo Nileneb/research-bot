@@ -124,15 +124,15 @@ erDiagram
     }
     
     CHAT_MESSAGES {
-        bigint id PK "autoincrement"
-        bigint chat_session_id FK
-        bigint user_id FK "null for system messages"
-        enum role "user|assistant|system|tool"
-        text content "not null"
-        varchar tool_name
-        json metadata
-        timestamp created_at
-        timestamp updated_at
+    bigint id PK "autoincrement"
+    bigint chat_session_id FK
+    bigint user_id FK "null for system messages"
+    varchar role "user|assistant|system|tool"
+    text content "not null"
+    varchar tool_name
+    json metadata
+    timestamp created_at
+    timestamp updated_at
     }
     
     MESSAGE_RESEARCH_CITATIONS {
@@ -186,7 +186,7 @@ gantt
     Repo-Hardening (CI, Tests, Lint)       :p1, 2025-11-01, 45d
     Config Layer (env, secrets, presets)   :p2, after p1, 30d
     UX Revamp (Navigation, States)         :p3, after p2, 45d
-    Public Beta (v0.9)                     :milestone, pM1, 2026-01-31
+    Public Beta (v0.9)                     :milestone, 2026-01-31, 0d
 
     section AI / Genetics / 3D
     PubMed + E-utilities Wrapper           :g1, 2025-11-10, 30d
