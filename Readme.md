@@ -1,5 +1,57 @@
 
 # Laravel 12 Research Bot Database Schema
+##Project Structure
+### Research Analysis Software Architecture
+```mermaid
+flowchart TD
+    A[Client] --> B[Laravel Service]
+    B --> C[Agent Pico]
+    B --> D[Agent Research]
+    B --> E[Database  SQL DB]
+    C --> F[Vector DB]
+    D --> G[MCP - Paper-Search]
+    subgraph UseCase[Use Case: Research]
+        A
+        B
+        C
+        D
+        E
+        F
+        G
+    end
+```
+##Sequence Diagram
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Client
+    participant Laravel as Laravel Service
+    participant Pico as Agent Pico
+    participant VDB as Vektor DB
+    participant Research as Agent Research
+    participant MCP as MCP (Paper-Search)
+    participant SQL as SQL DB
+
+    Client->>Laravel: Submit research query
+    Note over Laravel: Validate, auth, route
+
+    par Lightweight enrichment
+        Laravel->>Pico: Pre-filter / embed request
+        Pico->>VDB: Upsert/Retrieve embeddings
+        VDB-->>Pico: Vectors / candidates
+        Pico-->>Laravel: Filtered context
+    and Core paper search
+        Laravel->>Research: Research task with context
+        Research->>MCP: Query papers/APIs
+        MCP-->>Research: Results (papers, metadata)
+        Research-->>Laravel: Ranked findings
+    end
+
+    Laravel->>SQL: Persist chat, query, metadata, links
+    SQL-->>Laravel: IDs / status
+
+    Laravel-->>Client: Consolidated response (results + refs)
+```
 
 ## Entity Relationship Diagram
 
