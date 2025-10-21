@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<output>
+  <topic>Students OR Entrepreneurs AND AI AND Leadership</topic>
+  <query_executed_at>2024-07-01T00:00:00Z</query_executed_at>
+  <results>
+    <platform>PubMed</platform>
+    <title>Lumpy skin disease diagnosis in cattle: A deep learning approach optimized with RMSProp and MobileNetV2.</title>
+    <authors>Muhammad Saqib S</authors>
+    <authors>Iqbal M</authors>
+    <authors>Tahar Ben Othman M</authors>
+    <authors>Shahazad T</authors>
+    <authors>Yasin Ghadi Y</authors>
+    <authors>Al-Amro S</authors>
+    <authors>Mazhar T</authors>
+    <year>2024</year>
+    <journal>PLoS ONE</journal>
+    <doi>10.1371/journal.pone.0302862</doi>
+    <url>https://pubmed.ncbi.nlm.nih.gov/39102387/</url>
+    <abstract>Lumpy skin disease (LSD) is a critical problem for cattle populations, affecting both individual cows and the entire herd. Given cattle's critical role in meeting human needs, effective management of this disease is essential to prevent significant losses. The study proposes a deep learning approach using the MobileNetV2 model and the RMSprop optimizer to address this challenge. Tests on a dataset of healthy and lumpy cattle images show an impressive accuracy of 95%, outperforming existing benchmarks by 4-10%. These results underline the potential of the proposed methodology to revolutionize the diagnosis and management of skin diseases in cattle farming. Researchers and graduate students are the audience for our paper.</abstract>
+    <study_type>Deep learning application study</study_type>
+    <population>Cattle, cattle farmers (graduate students mentioned)</population>
+    <notes>Relevant AI method used but not directly about students, entrepreneurs, or leadership.</notes>
+  </results>
+  <results>
+    <platform>PubMed</platform>
+    <title>Graduate Student Literature Review: Implications of transition cow health for reproductive function and targeted reproductive management.</title>
+    <authors>Bruinjé TC</authors>
+    <authors>LeBlanc SJ</authors>
+    <year>2024</year>
+    <journal>Journal of Dairy Science</journal>
+    <doi>10.3168/jds.2023-24562</doi>
+    <url>https://pubmed.ncbi.nlm.nih.gov/38876223/</url>
+    <abstract>Negative associations of health disorders with reproductive performance, often measured with pregnancy per AI or the risk of pregnancy loss, have been demonstrated extensively. Most studies investigated common clinical diseases but did not include subclinical disorders comprehensively. They often evaluated cows subjected to hormonal synchronization protocols for timed AI, limiting the ability to understand how disease may affect spontaneous reproductive function, which is essential for targeted management programs with selective hormonal intervention. It is plausible that metabolic and inflammatory disorders have short- and long-term detrimental effects on different features of reproductive function that result in or contribute to reduced fertility. These may include: (1) re-establishment of endocrine function to promote follicular growth and first ovulation postpartum, (2) corpus luteum (CL) function, (3) estrus expression, and (4) uterine environment, fertilization, and embryonic development. In this narrative literature review, we discuss insights and knowledge gaps linking health disorders with these processes of reproductive function. A growing set of observational studies with adequate internal validity suggest that these outcomes may be affected by metabolic and inflammatory disorders that are common in the early postpartum period. A better characterization of these risk factors in multisite studies with greater external validity is warranted to develop decision-support tools to identify subgroups of cows that are more or less likely to be successful in targeted reproductive management programs.</abstract>
+    <study_type>Literature review</study_type>
+    <population>Graduate students (authors) studying dairy cow health</population>
+    <notes>Not directly related to AI or leadership in students/entrepreneurs.</notes>
+  </results>
+  <results>
+    <platform>PubMed</platform>
+    <title>Technical note: ShinyAnimalCV: open-source cloud-based web application for object detection, segmentation, and three-dimensional visualization of animals using computer vision.</title>
+    <authors>Wang J</authors>
+    <authors>Hu Y</authors>
+    <authors>Xiang L</authors>
+    <authors>Morota G</authors>
+    <authors>Brooks SA</authors>
+    <authors>Wickens CL</authors>
+    <authors>Miller-Cushon EK</authors>
+    <authors>Yu H</authors>
+    <year>2024</year>
+    <journal>Journal of Animal Science</journal>
+    <doi>10.1093/jas/skad416</doi>
+    <url>https://pubmed.ncbi.nlm.nih.gov/38134209/</url>
+    <abstract>Computer vision (CV), a non-intrusive and cost-effective technology, has furthered the development of precision livestock farming by enabling optimized decision-making through timely and individualized animal care. The availability of affordable two- and three-dimensional camera sensors, combined with various machine learning and deep learning algorithms, has provided a valuable opportunity to improve livestock production systems. However, despite the availability of various CV tools in the public domain, applying these tools to animal data can be challenging, often requiring users to have programming and data analysis skills, as well as access to computing resources. Moreover, the rapid expansion of precision livestock farming is creating a growing need to educate and train animal science students in CV. This presents educators with the challenge of efficiently demonstrating the complex algorithms involved in CV. Thus, the objective of this study was to develop ShinyAnimalCV, an open-source cloud-based web application designed to facilitate CV teaching in animal science. This application provides a user-friendly interface for performing CV tasks, including object segmentation, detection, three-dimensional surface visualization, and extraction of two- and three-dimensional morphological features. Nine pre-trained CV models using top-view animal data are included in the application. ShinyAnimalCV has been deployed online using cloud computing platforms. The source code of ShinyAnimalCV is available on GitHub, along with detailed documentation on training CV models using custom data and deploying ShinyAnimalCV locally to allow users to fully leverage the capabilities of the application. ShinyAnimalCV can help to support the teaching of CV, thereby laying the groundwork to promote the adoption of CV in the animal science community.</abstract>
+    <study_type>Application and educational tool description</study_type>
+    <population>Animal science students</population>
+    <notes>Relevant to education and AI but focused on animal science students and computer vision, not leadership or entrepreneurship.</notes>
+  </results>
+  <results>
+    <platform>PubMed</platform>
+    <title>Behavioral impulsivity is associated with pupillary alterations and hyperactivity in CDKL5 mutant mice.</title>
+    <authors>Viglione A</authors>
+    <authors>Sagona G</authors>
+    <authors>Carrara F</authors>
+    <authors>Amato G</authors>
+    <authors>Totaro V</authors>
+    <authors>Lupori L</authors>
+    <authors>Putignano E</authors>
+    <authors>Pizzorusso T</authors>
+    <authors>Mazziotti R</authors>
+    <year>2022</year>
+    <journal>Human Molecular Genetics</journal>
+    <doi>10.1093/hmg/ddac164</doi>
+    <url>https://pubmed.ncbi.nlm.nih.gov/35861639/</url>
+    <abstract>Cyclin-dependent kinase-like 5 (Cdkl5) deficiency disorder (CDD) is a severe neurodevelopmental condition caused by mutations in the X-linked Cdkl5 gene. CDD is characterized by early-onset seizures in the first month of life, intellectual disability, motor and social impairment. No effective treatment is currently available and medical management is only symptomatic and supportive. Recently, mouse models of Cdkl5 disorder have demonstrated that mice lacking Cdkl5 exhibit autism-like phenotypes, hyperactivity and dysregulations of the arousal system, suggesting the possibility to use these features as translational biomarkers. In this study, we tested Cdkl5 male and female mutant mice in an appetitive operant conditioning chamber to assess cognitive and motor abilities, and performed pupillometry to assess the integrity of the arousal system. Then, we evaluated the performance of artificial intelligence models to classify the genotype of the animals from the behavioral and physiological phenotype. The behavioral results show that CDD mice display impulsivity, together with low levels of cognitive flexibility and perseverative behaviors. We assessed arousal levels by simultaneously recording pupil size and locomotor activity. Pupillometry reveals in CDD mice a smaller pupil size and an impaired response to unexpected stimuli associated with hyperlocomotion, demonstrating a global defect in arousal modulation. Finally, machine learning reveals that both behavioral and pupillometry parameters can be considered good predictors of CDD. Since early diagnosis is essential to evaluate treatment outcomes and pupillary measures can be performed easily, we proposed the monitoring of pupil size as a promising biomarker for CDD.</abstract>
+    <study_type>Experimental and AI model evaluation study</study_type>
+    <population>Mouse model (non-human, thus excluded)</population>
+    <notes>Excluded based on non-human population.</notes>
+  </results>
+  <results>
+    <platform>PubMed</platform>
+    <title>The comparison of manual and LabVIEW-based fuzzy control on mechanical ventilation.</title>
+    <authors>Guler H</authors>
+    <authors>Ata F</authors>
+    <year>2014</year>
+    <journal>Proceedings of the Institution of Mechanical Engineers, Part H: Journal of Engineering in Medicine</journal>
+    <doi>10.1177/0954411914550513</doi>
+    <url>https://pubmed.ncbi.nlm.nih.gov/25205667/</url>
+    <abstract>The aim of this article is to develop a knowledge-based therapy for management of rats with respiratory distress. A mechanical ventilator was designed to achieve this aim. The designed ventilator is called an intelligent mechanical ventilator since fuzzy logic was used to control the pneumatic equipment according to the rat's status. LabVIEW software was used to control all equipments in the ventilator prototype and to monitor respiratory variables in the experiment. The designed ventilator can be controlled both manually and by fuzzy logic. Eight female Wistar-Albino rats were used to test the designed ventilator and to show the effectiveness of fuzzy control over manual control on pressure control ventilation mode. The anesthetized rats were first ventilated for 20 min manually. After that time, they were ventilated for 20 min by fuzzy logic. Student's t-test for p &lt; 0.05 was applied to the measured minimum, maximum and mean peak inspiration pressures to analyze the obtained results. The results show that there is no statistical difference in the rat's lung parameters before and after the experiments. It can be said that the designed ventilator and developed knowledge-based therapy support artificial respiration of living things successfully.</abstract>
+    <study_type>Experimental study with animals</study_type>
+    <population>Rats (non-human, thus excluded)</population>
+    <notes>Excluded based on non-human population.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>… study of the attitudes and perceptions of university students in business administration and management and in education toward artificial intelligence</title>
+    <authors>C Almaraz</authors>
+    <year>2023</year>
+    <journal>Education Sciences</journal>
+    <doi/>
+    <url>https://www.mdpi.com/2227-7102/13/6/609</url>
+    <abstract>… students who have received some training in AI and those who have not. Our postulation is that receiving AI education may lead students to … of AI on their future professional careers.</abstract>
+    <study_type>Survey study</study_type>
+    <population>University students in business and education</population>
+    <notes>Relevant to students, AI, and perceptions which may relate to leadership development.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>A comparative analysis of machine learning techniques for student retention management</title>
+    <authors>D Delen</authors>
+    <year>2010</year>
+    <journal>Computers &amp; Education</journal>
+    <doi/>
+    <url>https://www.sciencedirect.com/science/article/pii/S0167923610001041</url>
+    <abstract>Student attrition has become one of the most challenging … In spite of all of the programs and services to help retain students, … Enrollment management and the retention of students has …</abstract>
+    <study_type>Comparative analysis</study_type>
+    <population>Students</population>
+    <notes>Focus on AI techniques for student retention, indirectly related to leadership and management.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>Leadership is needed for ethical ChatGPT: Character, assessment, and learning using artificial intelligence (AI)</title>
+    <authors>J Crawford</authors>
+    <authors>M Cowling</authors>
+    <authors>KA Allen</authors>
+    <year>2023</year>
+    <journal>Australasian Journal of Educational Technology</journal>
+    <doi/>
+    <url>https://search.informit.org/doi/abs/10.3316/informit.T2024112000002891427961342</url>
+    <abstract>… can leverage AI like ChatGPT to build supportive learning environments for students who … We argue that effective teacher leadership is needed to develop student character so they …</abstract>
+    <study_type>Conceptual article</study_type>
+    <population>Students, educators</population>
+    <notes>Directly addresses leadership development intersecting with AI in education of students.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>Generative AI and the future of education: Ragnarök or reformation? A paradoxical perspective from management educators</title>
+    <authors>WM Lim</authors>
+    <authors>A Gunasekara</authors>
+    <authors>JL Pallant</authors>
+    <authors>JI Pallant</authors>
+    <year>2023</year>
+    <journal>International Journal of Management Education</journal>
+    <doi/>
+    <url>https://www.sciencedirect.com/science/article/pii/S1472811723000289</url>
+    <abstract>… artificial intelligence (AI) has taken the world by storm, with notable tension transpiring in the field of education. Given that Generative AI … the great debate on Generative AI in order to …</abstract>
+    <study_type>Conceptual and review</study_type>
+    <population>Management education students</population>
+    <notes>Discusses AI and educational leadership with a focus on management students.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>Integrating artificial intelligence in entrepreneurship education: Dynamic capabilities and marketing performance among student entrepreneurs</title>
+    <authors>Y Gong</authors>
+    <authors>S Wang</authors>
+    <authors>Y Dong</authors>
+    <year>2025</year>
+    <journal>International Journal of Management Education</journal>
+    <doi/>
+    <url>https://www.sciencedirect.com/science/article/pii/S1472811725001181</url>
+    <abstract>… among students. This study examines how AI adoption influences marketing performance through dynamic capabilities and organizational flexibility in the context of student …</abstract>
+    <study_type>Empirical study</study_type>
+    <population>Student entrepreneurs</population>
+    <notes>Highly relevant to AI, entrepreneurship education, and leadership related capabilities.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>Education 4.0 - Artificial Intelligence assisted higher education: early recognition system with machine learning to support students' success</title>
+    <authors>M Ciolacu</authors>
+    <authors>AF Tehrani</authors>
+    <authors>L Binder</authors>
+    <year>2018</year>
+    <journal>IEEE Access</journal>
+    <doi/>
+    <url>https://ieeexplore.ieee.org/abstract/document/8599203/</url>
+    <abstract>… and machine learning algorithms. The aim of this case study is to predict the final score of students … Management in summer term 2018 our early recognitions system with ML identifies in …</abstract>
+    <study_type>Case study</study_type>
+    <population>Higher education students</population>
+    <notes>Focus on AI technologies supporting student success, indirectly linked to leadership through education management.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>The Role of Artificial Intelligence (AI) in Student Assessment and Evaluation in Educational Leadership in Tertiary Institutions in Anambra State</title>
+    <authors>OM Ucheagwu</authors>
+    <year>2025</year>
+    <journal>Unilaws Journal of Education</journal>
+    <doi/>
+    <url>https://unilaws.org/unilaws/article/view/32</url>
+    <abstract>… of student assessment and evaluation, the integration of Artificial Intelligence (AI) offers transformative potential. This essay explores the application of AI in student assessment and …</abstract>
+    <study_type>Essay</study_type>
+    <population>Tertiary education students</population>
+    <notes>Explores AI in context of educational leadership and assessment.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>Digital explosion and entrepreneurship education: Impact on promoting entrepreneurial intention for business students</title>
+    <authors>A Dabbous</authors>
+    <authors>NM Boustani</authors>
+    <year>2023</year>
+    <journal>Journal of Risk and Financial Management</journal>
+    <doi/>
+    <url>https://www.mdpi.com/1911-8074/16/1/27</url>
+    <abstract>… education and artificial intelligence (AI) development on … Our study surveyed 223 business students in Lebanon. The … between performance expectancy of AI solutions, entrepreneurship …</abstract>
+    <study_type>Survey study</study_type>
+    <population>Business students</population>
+    <notes>Relevant for AI's impact on entrepreneurship education and intention.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>AI-enabled personalized learning: empowering management students for improving engagement and academic performance</title>
+    <authors>A Ellikkal</authors>
+    <authors>S Rajamohan</authors>
+    <year>2025</year>
+    <journal>Asia Pacific Journal of Management Education</journal>
+    <doi/>
+    <url>https://www.emerald.com/xjm/article/22/1/28/1273239</url>
+    <abstract>… effective in increasing student interest and improving AP. Furthermore, this study offers practical guidance for implementing AI in management education to empower students, enhance …</abstract>
+    <study_type>Empirical study</study_type>
+    <population>Management students</population>
+    <notes>Focus on AI empowerment in leadership-related management education.</notes>
+  </results>
+  <results>
+    <platform>Google Scholar</platform>
+    <title>AI student success predictor: Enhancing personalized learning in campus management systems</title>
+    <authors>M Shoaib</authors>
+    <authors>N Sayed</authors>
+    <authors>J Singh</authors>
+    <authors>J Shafi</authors>
+    <authors>S Khan</authors>
+    <year>2024</year>
+    <journal>Computers &amp; Education</journal>
+    <doi/>
+    <url>https://www.sciencedirect.com/science/article/pii/S0747563224001699</url>
+    <abstract>… However, inherent limitations in conventional CMS platforms hinder personalized student … An AI Student Success Predictor empowered by advanced machine learning algorithms, …</abstract>
+    <study_type>Development study</study_type>
+    <population>Students in higher education</population>
+    <notes>Development of AI tools for personalized learning and leadership skill development indirectly.</notes>
+  </results>
+  <schema>
+    <platform/>
+    <title/>
+    <authors/>
+    <year/>
+    <journal/>
+    <doi/>
+    <url/>
+    <abstract/>
+    <keywords/>
+    <study_type/>
+    <population/>
+    <notes/>
+  </schema>
+</output>
