@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<output>
+  <topic>Students OR Entrepreneurs AND AI AND Leadership</topic>
+  <pico>
+    <population>
+      <label>Students or Entrepreneurs</label>
+      <mesh>Students</mesh>
+      <mesh>Schools</mesh>
+      <mesh>Education, Higher</mesh>
+      <mesh>Adolescent</mesh>
+      <mesh>Entrepreneurship</mesh>
+      <text_words>student*</text_words>
+      <text_words>pupil*</text_words>
+      <text_words>schoolchild*</text_words>
+      <text_words>undergrad*</text_words>
+      <text_words>graduate*</text_words>
+      <text_words>postgraduate</text_words>
+      <text_words>"higher education"</text_words>
+      <text_words>entrepreneur*</text_words>
+      <text_words>startup*</text_words>
+      <text_words>"small business owner*"</text_words>
+    </population>
+    <intervention_exposure>
+      <label>Artificial Intelligence</label>
+      <mesh>Artificial Intelligence</mesh>
+      <mesh>Machine Learning</mesh>
+      <mesh>Deep Learning</mesh>
+      <mesh>Natural Language Processing</mesh>
+      <text_words>"artificial intelligence"</text_words>
+      <text_words>AI</text_words>
+      <text_words>"machine learning"</text_words>
+      <text_words>"deep learning"</text_words>
+      <text_words>"neural network*"</text_words>
+      <text_words>NLP</text_words>
+      <text_words>ChatGPT</text_words>
+      <text_words>"generative AI"</text_words>
+    </intervention_exposure>
+    <comparison/>
+    <outcome>
+      <label>Leadership</label>
+      <mesh>Leadership</mesh>
+      <mesh>Educational Leadership</mesh>
+      <mesh>Organizational Leadership</mesh>
+      <text_words>leadership</text_words>
+      <text_words>"leadership development"</text_words>
+      <text_words>"leadership skills"</text_words>
+      <text_words>"leadership style"</text_words>
+      <text_words>management</text_words>
+      <text_words>"leader behavio*"</text_words>
+      <text_words>"leadership training"</text_words>
+    </outcome>
+  </pico>
+  <exclusions>
+    <non_human>true</non_human>
+    <terms>mouse</terms>
+    <terms>rat</terms>
+    <terms>murine</terms>
+    <terms>animal*</terms>
+  </exclusions>
+  <platform_queries>
+    <pubmed>
+      <scope>PubMed</scope>
+      <query>(
+  ("Students"[MeSH] OR "Schools"[MeSH] OR "Education, Higher"[MeSH] OR "Adolescent"[MeSH] OR "Entrepreneurship"[MeSH]
+   OR student*[TIAB] OR pupil*[TIAB] OR schoolchild*[TIAB] OR undergrad*[TIAB] OR graduate*[TIAB] OR postgraduate[TIAB] OR "higher education"[TIAB]
+   OR entrepreneur*[TIAB] OR startup*[TIAB] OR "small business owner*"[TIAB])
+)
+AND
+(
+  ("Artificial Intelligence"[MeSH] OR "Machine Learning"[MeSH] OR "Deep Learning"[MeSH] OR "Natural Language Processing"[MeSH]
+   OR "artificial intelligence"[TIAB] OR AI[TIAB] OR "machine learning"[TIAB] OR "deep learning"[TIAB]
+   OR "neural network*"[TIAB] OR "natural language processing"[TIAB] OR NLP[TIAB] OR ChatGPT[TIAB] OR "generative AI"[TIAB])
+)
+AND
+(
+  ("Leadership"[MeSH] OR "Educational Leadership"[MeSH] OR "Organizational Leadership"[MeSH]
+   OR leadership[TIAB] OR "leadership development"[TIAB] OR "leadership skills"[TIAB]
+   OR "leadership style"[TIAB] OR management[TIAB] OR "leader behavio*"[TIAB] OR "leadership training"[TIAB])
+)
+AND NOT
+(
+  "Animals"[MeSH] NOT "Humans"[MeSH]
+)</query>
+    </pubmed>
+    <google_scholar>
+      <scope>Google Scholar</scope>
+      <query>(student* OR undergrad* OR graduate* OR postgraduate OR pupil* OR "higher education" OR entrepreneur* OR startup* OR "small business owner*") ("artificial intelligence" OR AI OR "machine learning" OR "deep learning" OR "neural network*" OR NLP OR ChatGPT OR "generative AI") (leadership OR "leadership development" OR "leadership skills" OR "leadership style" OR management OR "leader behavior" OR "leadership training") -mouse -rat -animal</query>
+    </google_scholar>
+    <scopus>
+      <scope>Scopus</scope>
+      <query>TITLE-ABS-KEY((student* OR undergrad* OR graduate* OR postgraduate OR pupil* OR "higher education" OR entrepreneur* OR startup* OR "small business owner*") AND ("artificial intelligence" OR AI OR "machine learning" OR "deep learning" OR "neural network*" OR NLP OR ChatGPT OR "generative AI") AND (leadership OR "leadership development" OR "leadership skills" OR "leadership style" OR management OR "leader behavio*" OR "leadership training")) AND NOT TITLE-ABS-KEY(mouse OR rat OR murine OR animal*)</query>
+    </scopus>
+    <web_of_science>
+      <scope>Web of Science</scope>
+      <query>TS=((student* OR undergrad* OR graduate* OR postgraduate OR pupil* OR "higher education" OR entrepreneur* OR startup* OR "small business owner*") AND ("artificial intelligence" OR AI OR "machine learning" OR "deep learning" OR "neural network*" OR NLP OR ChatGPT OR "generative AI") AND (leadership OR "leadership development" OR "leadership skills" OR "leadership style" OR management OR "leader behavio*" OR "leadership training")) NOT TS=(mouse OR rat OR murine OR animal*)</query>
+    </web_of_science>
+  </platform_queries>
+  <notes>
+    <logic>Combined population terms (students OR entrepreneurs), PICO linked with AND, synonyms grouped with OR; applied NOT to filter out animal studies.</logic>
+    <wildcards>Used '*' truncation for stems in Scopus/Web of Science and text word fields; explicit variants included in Google Scholar.</wildcards>
+    <language>English</language>
+    <comparison>None specified</comparison>
+  </notes>
+  <metadata>
+    <created_at>2024-07-01T00:00:00Z</created_at>
+    <version>1.0</version>
+    <author>AI Research Assistant</author>
+  </metadata>
+</output>
