@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<output>
+  <topic>Leadership and Artificial Intelligence in Entrepreneurs or Startups</topic>
+  <pico>
+    <population>
+      <label>Entrepreneurs and Startups</label>
+      <mesh>Entrepreneurship</mesh>
+      <mesh>Small Business</mesh>
+      <text_words>entrepreneur*</text_words>
+      <text_words>startup*</text_words>
+      <text_words>new venture*</text_words>
+    </population>
+    <intervention_exposure>
+      <label>Artificial Intelligence Techniques</label>
+      <mesh>Artificial Intelligence</mesh>
+      <mesh>Machine Learning</mesh>
+      <mesh>Deep Learning</mesh>
+      <mesh>Neural Networks, Computer</mesh>
+      <text_words>artificial intelligence</text_words>
+      <text_words>AI</text_words>
+      <text_words>machine learning</text_words>
+      <text_words>deep learning</text_words>
+      <text_words>neural network*</text_words>
+      <text_words>cognitive comput*</text_words>
+    </intervention_exposure>
+    <comparison/>
+    <outcome>
+      <label>Leadership</label>
+      <mesh>Leadership</mesh>
+      <text_words>leadership</text_words>
+      <text_words>leader*</text_words>
+      <text_words>leadership style*</text_words>
+      <text_words>management</text_words>
+    </outcome>
+  </pico>
+  <exclusions>
+    <non_human>false</non_human>
+  </exclusions>
+  <platform_queries>
+    <pubmed>
+      <scope>PubMed</scope>
+      <query>("Entrepreneurship"[Mesh] OR "Small Business"[Mesh] OR entrepreneur*[TIAB] OR startup*[TIAB] OR "new venture*"[TIAB]) AND ("Artificial Intelligence"[Mesh] OR "Machine Learning"[Mesh] OR "Deep Learning"[Mesh] OR "Neural Networks, Computer"[Mesh] OR "artificial intelligence"[TIAB] OR AI[TIAB] OR "machine learning"[TIAB] OR "deep learning"[TIAB] OR "neural network*"[TIAB] OR "cognitive comput*"[TIAB]) AND ("Leadership"[Mesh] OR leadership[TIAB] OR leader*[TIAB] OR "leadership style*"[TIAB] OR management[TIAB])</query>
+    </pubmed>
+    <google_scholar>
+      <scope>Google Scholar</scope>
+      <query>("artificial intelligence" OR AI OR "machine learning" OR "deep learning") leadership (entrepreneur OR entrepreneurs OR startup OR startups OR "new venture" OR "new ventures")</query>
+    </google_scholar>
+    <scopus>
+      <scope>Scopus</scope>
+      <query>TITLE-ABS-KEY((entrepreneur* OR startup* OR "new venture*") AND ("artificial intelligence" OR AI OR "machine learning" OR "deep learning" OR "neural network*" OR "cognitive comput*") AND (leadership OR leader* OR "leadership style*" OR management))</query>
+    </scopus>
+    <web_of_science>
+      <scope>Web of Science</scope>
+      <query>TS=(entrepreneur* OR startup* OR "new venture*") AND TS=("artificial intelligence" OR AI OR "machine learning" OR "deep learning" OR "neural network*" OR "cognitive comput*") AND TS=(leadership OR leader* OR "leadership style*" OR management)</query>
+    </web_of_science>
+  </platform_queries>
+  <notes>
+    <logic>Synonyms and variants for each PICO component are combined with OR; components linked with AND to focus on studies addressing entrepreneurs/startups, AI methods, and leadership. No comparison needed.</logic>
+    <wildcards>Asterisk (*) truncation used where supported for word-stem variations.</wildcards>
+    <language>English</language>
+    <comparison>Not applicable</comparison>
+  </notes>
+  <metadata>
+    <created_at>2024-06-27</created_at>
+    <version>1.0</version>
+    <author>AI research assistant</author>
+  </metadata>
+</output>
