@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<output>
+  <topic>Leadership and AI in Entrepreneurial Contexts</topic>
+  <pico>
+    <population>
+      <label>Entrepreneurs and Startups</label>
+      <mesh>Entrepreneurship</mesh>
+      <text_words>entrepreneur*</text_words>
+      <text_words>startup*</text_words>
+      <text_words>"new venture*"</text_words>
+    </population>
+    <intervention_exposure>
+      <label>Leadership and Artificial Intelligence</label>
+      <mesh>Leadership</mesh>
+      <mesh>Transformational Leadership</mesh>
+      <mesh>Artificial Intelligence</mesh>
+      <mesh>Machine Learning</mesh>
+      <mesh>Deep Learning</mesh>
+      <text_words>leadership</text_words>
+      <text_words>leader*</text_words>
+      <text_words>"transformational leadership"</text_words>
+      <text_words>artificial intelligence</text_words>
+      <text_words>AI</text_words>
+      <text_words>"machine learning"</text_words>
+      <text_words>"deep learning"</text_words>
+    </intervention_exposure>
+    <comparison/>
+    <outcome>
+      <label>Performance, Innovation and Adoption Outcomes</label>
+      <mesh>Diffusion of Innovation</mesh>
+      <mesh>Organizational Innovation</mesh>
+      <mesh>Technology Adoption</mesh>
+      <text_words>performance</text_words>
+      <text_words>innovation</text_words>
+      <text_words>adoption</text_words>
+      <text_words>success</text_words>
+      <text_words>growth</text_words>
+    </outcome>
+  </pico>
+  <exclusions>
+    <non_human>true</non_human>
+    <terms>animals</terms>
+  </exclusions>
+  <platform_queries>
+    <pubmed>
+      <scope>PubMed</scope>
+      <query>(("Entrepreneurship"[MeSH] OR entrepreneur*[TIAB] OR startup*[TIAB] OR "new venture*"[TIAB]) AND ("Leadership"[MeSH] OR "Transformational Leadership"[MeSH] OR leadership[TIAB] OR leader*[TIAB]) AND ("Artificial Intelligence"[MeSH] OR "Machine Learning"[MeSH] OR "Deep Learning"[MeSH] OR artificial intelligence[TIAB] OR AI[TIAB] OR "machine learning"[TIAB] OR "deep learning"[TIAB]) AND ("Diffusion of Innovation"[MeSH] OR "Organizational Innovation"[MeSH] OR "Technology Adoption"[MeSH] OR performance[TIAB] OR innovation[TIAB] OR adoption[TIAB] OR success[TIAB] OR growth[TIAB])) AND NOT (animals[mh] NOT humans[mh])</query>
+    </pubmed>
+    <google_scholar>
+      <scope>Google Scholar</scope>
+      <query>("leadership" OR "transformational leadership") ("artificial intelligence" OR AI) (entrepreneur OR startup OR "new venture") (performance OR innovation OR adoption OR success OR growth)</query>
+    </google_scholar>
+    <scopus>
+      <scope>Scopus</scope>
+      <query>TITLE-ABS-KEY((entrepreneur* OR startup* OR "new venture*") AND (leadership OR leader* OR "transformational leadership") AND ("artificial intelligence" OR AI OR "machine learning" OR "deep learning") AND (performance OR innovation OR adoption OR success OR growth))</query>
+    </scopus>
+    <web_of_science>
+      <scope>Web of Science</scope>
+      <query>TS=((entrepreneur* OR startup* OR "new venture*") AND (leadership OR "transformational leadership") AND ("artificial intelligence" OR AI OR "machine learning" OR "deep learning") AND (performance OR innovation OR adoption OR success OR growth))</query>
+    </web_of_science>
+  </platform_queries>
+  <notes>
+    <logic>Population (entrepreneurs and startups), Intervention/Exposure (leadership + AI), Outcome (performance/innovation/adoption) combined with AND; synonyms within each concept grouped with OR; platform-specific syntax applied.</logic>
+    <wildcards>Asterisk (*) used for word stems; explicit synonyms in Google Scholar as truncation is not fully supported there.</wildcards>
+    <language>English</language>
+    <comparison>No comparison group specified</comparison>
+  </notes>
+  <metadata>
+    <created_at>2024-06-21T12:00:00Z</created_at>
+    <version>1.0</version>
+    <author>AI Research Assistant</author>
+  </metadata>
+</output>
