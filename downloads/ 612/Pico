@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<output>
+  <topic>Genetics and Gamification in Research and Impact on Society</topic>
+  <pico>
+    <population>
+      <label>Genetics Research</label>
+      <mesh>Genetics</mesh>
+      <mesh>Genomics</mesh>
+      <text_words>genetics</text_words>
+      <text_words>genomics</text_words>
+      <text_words>genetic research</text_words>
+      <text_words>genetic study</text_words>
+      <text_words>genetic studies</text_words>
+    </population>
+    <intervention_exposure>
+      <label>Gamification</label>
+      <mesh>Educational Games</mesh>
+      <text_words>gamification</text_words>
+      <text_words>gamified</text_words>
+      <text_words>game-based</text_words>
+      <text_words>serious games</text_words>
+      <text_words>educational games</text_words>
+    </intervention_exposure>
+    <comparison/>
+    <outcome>
+      <label>Societal Impact</label>
+      <mesh>Social Change</mesh>
+      <mesh>Social Sciences</mesh>
+      <mesh>Public Opinion</mesh>
+      <text_words>social impact</text_words>
+      <text_words>societal impact</text_words>
+      <text_words>public engagement</text_words>
+      <text_words>public perception</text_words>
+    </outcome>
+  </pico>
+  <exclusions>
+    <non_human>true</non_human>
+    <terms>animal</terms>
+    <terms>animals</terms>
+    <terms>animal studies</terms>
+    <terms>nonhuman</terms>
+    <terms>non-human</terms>
+  </exclusions>
+  <platform_queries>
+    <pubmed>
+      <scope>PubMed</scope>
+      <query>(("Genetics"[Mesh] OR "Genomics"[Mesh] OR genetics[TIAB] OR genomics[TIAB] OR "genetic research"[TIAB] OR "genetic study"[TIAB] OR "genetic studies"[TIAB]) AND ("Educational Games"[Mesh] OR gamification[TIAB] OR gamified[TIAB] OR "game-based"[TIAB] OR "serious games"[TIAB] OR educational games[TIAB]) AND ("Social Change"[Mesh] OR "Social Sciences"[Mesh] OR "Public Opinion"[Mesh] OR "social impact"[TIAB] OR "societal impact"[TIAB] OR "public engagement"[TIAB] OR "public perception"[TIAB])) NOT (animals[Mesh] OR animal*[TIAB] OR nonhuman*[TIAB])</query>
+    </pubmed>
+    <google_scholar>
+      <scope>Google Scholar</scope>
+      <query>("genetics" OR "genomics" OR "genetic research" OR "genetic study" OR "genetic studies") ("gamification" OR "gamified" OR "game-based" OR "serious games" OR "educational games") ("social impact" OR "societal impact" OR "public engagement" OR "public perception") -animal -animals -nonhuman -"animal studies"</query>
+    </google_scholar>
+    <scopus>
+      <scope>Scopus</scope>
+      <query>TITLE-ABS-KEY((genetic* OR genomics OR "genetic research" OR "genetic study" OR "genetic studies") AND (gamification OR gamif* OR "game-based" OR "serious games" OR "educational games") AND ("social impact" OR "societal impact" OR "public engagement" OR "public perception")) AND NOT TITLE-ABS-KEY(animal* OR nonhuman* OR "animal studies")</query>
+    </scopus>
+    <web_of_science>
+      <scope>Web of Science</scope>
+      <query>TS=(genetic* OR genomics OR "genetic research" OR "genetic study" OR "genetic studies") AND TS=(gamification OR gamif* OR "game-based" OR "serious games" OR "educational games") AND TS=("social impact" OR "societal impact" OR "public engagement" OR "public perception") NOT TS=(animal* OR nonhuman* OR "animal studies")</query>
+    </web_of_science>
+  </platform_queries>
+  <notes>
+    <logic>Grouped synonyms and controlled vocabulary terms for each PICO component with OR and combined Population AND Intervention AND Outcome with AND; applied NOT/AND NOT to exclude non-human studies.</logic>
+    <wildcards>Used * for truncation where supported (e.g., genetic*, gamif*); no wildcards in Google Scholar.</wildcards>
+    <language>English</language>
+    <comparison>No comparison group</comparison>
+  </notes>
+  <metadata>
+    <created_at>2024-07-05</created_at>
+    <version>1.0</version>
+    <author>AI Research Assistant</author>
+  </metadata>
+</output>
