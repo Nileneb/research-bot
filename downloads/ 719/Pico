@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<output>
+  <topic>Older men with diabetes and magnesium supplementation effects on glycemic control</topic>
+  <pico>
+    <population>
+      <label>Older men with diabetes</label>
+      <mesh>Aged</mesh>
+      <mesh>Male</mesh>
+      <mesh>Diabetes Mellitus, Type 2</mesh>
+      <text_words>old men</text_words>
+      <text_words>older male</text_words>
+      <text_words>elderly men</text_words>
+      <text_words>aged male</text_words>
+      <text_words>type 2 diabetes</text_words>
+      <text_words>T2DM</text_words>
+    </population>
+    <intervention_exposure>
+      <label>Magnesium supplementation</label>
+      <mesh>Magnesium</mesh>
+      <text_words>magnesium supplement*</text_words>
+      <text_words>magnesium supplementation</text_words>
+      <text_words>supplemental magnesium</text_words>
+    </intervention_exposure>
+    <comparison/>
+    <outcome>
+      <label>Glycemic control</label>
+      <mesh>Glycemic Control</mesh>
+      <text_words>glycemic control</text_words>
+      <text_words>blood glucose</text_words>
+      <text_words>HbA1c</text_words>
+      <text_words>insulin sensitivity</text_words>
+    </outcome>
+  </pico>
+  <exclusions>
+    <non_human>true</non_human>
+    <terms>animal</terms>
+    <terms>rodent</terms>
+    <terms>mice</terms>
+    <terms>rats</terms>
+  </exclusions>
+  <platform_queries>
+    <pubmed>
+      <scope>MeSH terms and Title/Abstract</scope>
+      <query>(("Aged"[MeSH] OR "Male"[MeSH] OR aged[TIAB] OR "older male"[TIAB] OR "old men"[TIAB] OR elderly[TIAB]) AND ("Diabetes Mellitus, Type 2"[MeSH] OR "Diabetes Mellitus"[MeSH] OR "type 2 diabetes"[TIAB] OR T2DM[TIAB] OR diabetes[TIAB]) AND ("Magnesium"[MeSH] OR magnesium[TIAB] OR "magnesium supplementation"[TIAB] OR "magnesium supplement*"[TIAB] OR "supplemental magnesium"[TIAB]) AND ("Glycemic Control"[MeSH] OR "glycemic control"[TIAB] OR "blood glucose"[TIAB] OR HbA1c[TIAB] OR "insulin sensitivity"[TIAB])) AND NOT (Animals[MeSH] NOT Humans[MeSH])</query>
+    </pubmed>
+    <google_scholar>
+      <scope>All fields (implicit AND between terms)</scope>
+      <query>("old men" OR elderly OR "older male") (diabetes OR "type 2 diabetes" OR T2DM) ("magnesium supplement" OR "magnesium supplementation") ("glycemic control" OR HbA1c) -animal</query>
+    </google_scholar>
+    <scopus>
+      <scope>TITLE-ABS-KEY</scope>
+      <query>TITLE-ABS-KEY((elder* OR "older male" OR aged OR elderly) AND (diabet* OR "type 2 diabetes" OR T2DM) AND (magnesium W/2 supplement*) AND ("glycemic control" OR HbA1c OR "blood glucose" OR "insulin sensitivity")) AND NOT TITLE-ABS-KEY(animal* OR rat* OR mouse* OR rodent*)</query>
+    </scopus>
+    <web_of_science>
+      <scope>Topic (TS=</scope>
+      <query>TS=(elder* OR "older male" OR aged OR elderly) AND TS=(diabet* OR "type 2 diabetes" OR T2DM) AND TS=(magnesium supplement* OR "magnesium supplementation" OR "supplemental magnesium") AND TS=("glycemic control" OR HbA1c OR "blood glucose" OR "insulin sensitivity") AND NOT TS=(animal* OR mouse* OR rat* OR rodent*)</query>
+    </web_of_science>
+  </platform_queries>
+  <notes>
+    <logic>Group synonyms with OR within each PICO, combine PICO elements with AND, and exclude non-human studies with NOT.</logic>
+    <wildcards>Use * for stemming (e.g., elder*), proximity operator W/2 in Scopus, and no truncation in Google Scholar.</wildcards>
+    <language>English terms for database indexing and retrieval.</language>
+    <comparison>No specific comparator; baseline or placebo-controlled studies will be captured implicitly.</comparison>
+  </notes>
+  <metadata>
+    <created_at>2024-06-20</created_at>
+    <version>1.0</version>
+    <author>AI Research Assistant</author>
+  </metadata>
+</output>
