@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+  <population>
+    <label/>
+    <mesh/>
+    <text_words/>
+  </population>
+  <intervention_exposure/>
+  <comparison/>
+  <outcome/>
+  <pubmed>
+    <query/>
+  </pubmed>
+  <google_scholar>
+    <query/>
+  </google_scholar>
+  <scopus>
+    <query/>
+  </scopus>
+  <web_of_science>
+    <query/>
+  </web_of_science>
+</root>
