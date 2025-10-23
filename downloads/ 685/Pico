@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<output>
+  <topic>Gamification of Research, Data Processing, and Literature Search</topic>
+  <pico>
+    <population>
+      <label>Research activities, data processing, and literature search</label>
+      <mesh>Research</mesh>
+      <mesh>Data Processing</mesh>
+      <mesh>Information Storage and Retrieval</mesh>
+      <text_words>research</text_words>
+      <text_words>data processing</text_words>
+      <text_words>information retrieval</text_words>
+      <text_words>literature search</text_words>
+    </population>
+    <intervention_exposure>
+      <label>Gamification</label>
+      <mesh>Video Games</mesh>
+      <text_words>gamification</text_words>
+      <text_words>gameful design</text_words>
+      <text_words>game-based</text_words>
+      <text_words>serious game*</text_words>
+      <text_words>game element*</text_words>
+      <text_words>game mechanic*</text_words>
+    </intervention_exposure>
+    <comparison/>
+    <outcome>
+      <label>Engagement, motivation, performance, and efficiency</label>
+      <mesh>Motivation</mesh>
+      <text_words>engagement</text_words>
+      <text_words>user engagement</text_words>
+      <text_words>motivation</text_words>
+      <text_words>task performance</text_words>
+      <text_words>efficiency</text_words>
+      <text_words>productivity</text_words>
+    </outcome>
+  </pico>
+  <exclusions>
+    <non_human>true</non_human>
+    <terms>animal*</terms>
+    <terms>rat</terms>
+    <terms>mouse</terms>
+    <terms>mice</terms>
+  </exclusions>
+  <platform_queries>
+    <pubmed>
+      <scope>PubMed</scope>
+      <query>("Research"[MeSH] OR research[TIAB] OR "Data Processing"[MeSH] OR "data processing"[TIAB] OR "Information Storage and Retrieval"[MeSH] OR "information retrieval"[TIAB] OR "literature search"[TIAB]) AND (gamification[TIAB] OR "gameful design"[TIAB] OR "game-based"[TIAB] OR serious game*[TIAB] OR game element*[TIAB] OR game mechanic*[TIAB] OR "Video Games"[MeSH]) AND ("Motivation"[MeSH] OR motivation[TIAB] OR engagement[TIAB] OR "user engagement"[TIAB] OR "task performance"[TIAB] OR efficiency[TIAB] OR productivity[TIAB]) AND NOT ("Animals"[MeSH] OR animal*[TIAB] OR rat[TIAB] OR mouse[TIAB] OR mice[TIAB])</query>
+    </pubmed>
+    <google_scholar>
+      <scope>Google Scholar</scope>
+      <query>("gamification" OR "game-based" OR "gameful design" OR "serious game" OR "game element" OR "game mechanic") ("research" OR "data processing" OR "information retrieval" OR "literature search") (engagement OR motivation OR performance OR efficiency OR productivity) -animal* -rat -mouse -mice</query>
+    </google_scholar>
+    <scopus>
+      <scope>Scopus</scope>
+      <query>TITLE-ABS-KEY(gamif* OR "gameful design" OR "game-based" OR "serious game*" OR "game element*" OR "game mechanic*") AND TITLE-ABS-KEY(research OR "data process*" OR "information retriev*" OR "literature search") AND TITLE-ABS-KEY(engag* OR motiv* OR perform* OR efficien* OR product*) AND NOT TITLE-ABS-KEY(animal* OR rat OR mouse OR mice)</query>
+    </scopus>
+    <web_of_science>
+      <scope>Web of Science</scope>
+      <query>TS=(gamif* OR "gameful design" OR "game-based" OR "serious game*" OR "game element*" OR "game mechanic*") AND TS=(research OR "data processing" OR "information retrieval" OR "literature search") AND TS=(engag* OR motiv* OR perform* OR efficien* OR product*) AND NOT TS=(animal* OR rat OR mouse OR mice)</query>
+    </web_of_science>
+  </platform_queries>
+  <notes>
+    <logic>Grouped synonyms and related terms with OR for each PICO component; combined components with AND; applied NOT to exclude non-human studies; included MeSH terms in PubMed query for controlled vocabulary coverage.</logic>
+    <wildcards>Asterisk (*) used for truncation to capture word variants in Scopus and Web of Science; text word variants explicitly listed in Google Scholar.</wildcards>
+    <language>English</language>
+    <comparison>No comparison concept was specified.</comparison>
+  </notes>
+  <metadata>
+    <created_at>2024-06-18</created_at>
+    <version>1.0</version>
+    <author>AI Research Assistant</author>
+  </metadata>
+</output>
