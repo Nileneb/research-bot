@@ -1,0 +1,2185 @@
+{
+  "name": "PICO-Search",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        -208
+      ],
+      "id": "d52354f8-7fd8-48d0-ab81-479bfa3f2044",
+      "name": "When chat message received",
+      "webhookId": "2e5d6dd3-ed5c-4f9f-962e-f00f61f50251",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "o4-mini-2025-04-16",
+          "mode": "list",
+          "cachedResultName": "o4-mini-2025-04-16"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        256,
+        112
+      ],
+      "id": "a0a9e475-0220-4419-89ae-06651d0cedf2",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "i4Oy19IoRAArnZUn",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "endpointUrl": "http://mcp-paper-search:8001/sse-paper-search",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [
+        1392,
+        80
+      ],
+      "id": "4f1d276b-4d43-447b-941e-358b07367fed",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "weaviateCollection": {
+          "__rl": true,
+          "value": "Research",
+          "mode": "list",
+          "cachedResultName": "Research"
+        },
+        "options": {
+          "textKey": "_text"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+      "typeVersion": 1.3,
+      "position": [
+        2560,
+        -64
+      ],
+      "id": "0a8b7274-17fb-4944-a666-5a64fd078243",
+      "name": "Weaviate Vector Store",
+      "credentials": {
+        "weaviateApi": {
+          "id": "tpJ1qo6cemOqvLOd",
+          "name": "Weaviate Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "repository": "=https://github.com/Nileneb/research-bot/downloads/ {{ $execution.id }}",
+        "additionalOptions": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentGithubLoader",
+      "typeVersion": 1.1,
+      "position": [
+        2592,
+        336
+      ],
+      "id": "e40cae18-554d-4c20-a30a-3a85c1845c2e",
+      "name": "GitHub Document Loader",
+      "credentials": {
+        "githubApi": {
+          "id": "xhLM7Wn2DRUIXuzP",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1216,
+        32
+      ],
+      "id": "8f486025-b3cf-40aa-aede-fcfe8ab55e71",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "nkMB0IuuWe69Mlpn",
+          "name": "benediktov api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "jsonToxml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        672,
+        -592
+      ],
+      "id": "5372dbb0-ee94-4cc2-b06c-97010d563558",
+      "name": "XML"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "nileneb",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "research-bot",
+          "mode": "list",
+          "cachedResultName": "research-bot",
+          "cachedResultUrl": "https://github.com/Nileneb/research-bot"
+        },
+        "filePath": "=downloads/ {{ $execution.id }}/results.md",
+        "fileContent": "={{ $json.data }}",
+        "commitMessage": "xml-upload"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        2384,
+        -272
+      ],
+      "id": "ff28cc7d-4c69-4647-9d75-2a57a6f5362e",
+      "name": "Create a file",
+      "webhookId": "d53b7bd4-377a-4b5e-9739-7f7dac22c192",
+      "credentials": {
+        "githubApi": {
+          "id": "xhLM7Wn2DRUIXuzP",
+          "name": "GitHub account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "\n{\"query\":\"string\",\"results_total_per_source\":[{\"pubmed_results\":0,\"scopus_results\":0,\"WoS_results\":0,\"scholar_results\":0}],\"results\":[{\"title\":\"string\",\"abstract\":\"string|null\",\"url\":\"string|null\",\"doi\":\"string|null\",\"pmid\":\"string|null\",\"arxiv_id\":\"string|null\",\"year\":\"int\",\"journal\":\"string|null\",\"authors\":[\"string\"],\"categories\":[\"string\"],\"published\":\"YYYY-MM-DD|null\",\"population\":\"string|null\",\"intervention\":\"string|null\",\"outcome\":\"string|null\"}],\"classification\":[{\"title\":\"string\",\"primary_topic\":\"string\",\"secondary_topics\":[\"string\"],\"potential_impact\":0}],\"runtime\":{\"tool_calls\":[\"MCP_PAPER_SEARCH\",\"WEAVIATE_RETRIEVE\"],\"took_ms\":0}}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1552,
+        16
+      ],
+      "id": "a2c85a41-264a-463c-a63b-783d8feaa52b",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "content": "PICO-Part",
+        "height": 640,
+        "width": 976,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        208,
+        -432
+      ],
+      "typeVersion": 1,
+      "id": "f647962d-3315-439a-b58d-b8e5e23c3160",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Research\n",
+        "height": 656,
+        "width": 1456,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1200,
+        -448
+      ],
+      "typeVersion": 1,
+      "id": "c9ebb81f-3b36-45f6-90e8-6a116ffde26d",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an AI‑powered research assistant that develops PICO search strategies for systematic literature searches.\nYou got two Working Modes:\nA: Find a initial research question when you get a {{ $json.chatInput }}.\nB: Optimize a existing Research question for the different Databases. Use the GoogleSheets tool to get the Hits for the last PICO questions from the Databases.\n\n\nAnalyze the research question interdisciplinarily using the PICO model:\n\n* **Population/Problem (P):** Describe the target group or problem (e.g., patient characteristic, population group) and identify synonyms or related terms.\n* **Intervention/Exposure (I/E):** Determine the main intervention or exposure (e.g., treatment, risk factor) and identify synonyms or related terms.\n* **Comparison (C):** If relevant, specify the comparator (e.g., standard treatment, placebo) and collect synonyms/variants.\n* **Outcome (O):** State the desired outcome (e.g., clinical endpoint, effect) and list synonyms or related terms.\n\nBased on this PICO analysis, create precise, logical search terms. From these, formulate platform‑optimized search strings by:\n\n1. **Grouping synonyms and related terms:** Combine equivalent terms per PICO component in parentheses and connect them with **OR** (to broaden the search). Use quotation marks for exact phrases (e.g., \"myocardial infarction\"). Apply truncation/wildcards (e.g., `*` for word stems) where supported to cover different word endings.\n2. **Combining concepts with AND:** Connect the individual PICO components (Population AND Intervention [AND Comparison] AND Outcome) with **AND** to restrict results to studies that cover all aspects.\n3. **Excluding unwanted content with NOT:** If necessary, exclude terms with **NOT** (e.g., exclude animal studies with `NOT animal`). Note: On some platforms, NOT is expressed with specific syntax (e.g., a minus sign `-` in Google Scholar for exclusion).\n4. **Including controlled vocabulary:** Where available, add controlled vocabulary terms (e.g., **MeSH terms** in PubMed or other thesaurus terms) for **medical and social science concepts** to cover synonyms. (Example: In PubMed, use both *text words* and suitable *MeSH terms* so that all relevant articles are retrieved regardless of the authors’ wording.)\n\nNow generate an optimized search string for **each of the following platforms**, tailored to their specific syntax and features:\n\n* **PubMed:** Integrate MeSH terms and free‑text terms with OR. Use field tags where helpful (e.g., `[MeSH]` for MeSH, `[TIAB]` for Title/Abstract). Ensure Boolean operators are uppercase (AND, OR, NOT). Example structure: `(Synonym1 OR Synonym2 OR MeSH term) AND (SynonymI1 OR SynonymI2 OR MeSH‑I) AND ...`.\n* **Google Scholar:** Keep the query under ~250 characters (character limit) and do not use MeSH terms (not available). Craft a simple but precise keyword search: use OR for synonyms (uppercase OR) and quotation marks for exact phrases. **AND** is implied by spaces; use a minus `-` for NOT operations (e.g., `Therapy -surgery` for *Therapy NOT surgery*). No `*` truncation is possible (Scholar only partially infers variants)—therefore include important variants explicitly as synonyms.\n* **Scopus:** Use Advanced Search with field codes such as `TITLE-ABS-KEY()` (or the default title/abstract/keywords). Combine synonyms with OR in parentheses and PICO concepts with AND. Syntax: Booleans **must** be uppercase; use **AND NOT** for exclusion (rather than NOT alone). Truncation with `*` and wildcards like `?` are allowed (e.g., `child*`). Use **proximity operators** (W/n, PRE/n) if needed to require terms to appear near each other in title/abstract.\n* **Web of Science:** Run a *Topic* search (title, abstract, keywords). Combine synonyms with OR in parentheses and concepts with AND (in **Advanced Search**, e.g., `TS=(Synonym1 OR Synonym2) AND TS=(SynonymI1 OR SynonymI2) ...`). Always uppercase Booleans. Use `*` to truncate word stems (e.g., `technolog*` finds *technology, technological*). Web of Science has no native thesaurus; rely on free keywords and variants. (Note: WoS applies **lemmatization**—common plural and word variants are matched automatically, though it’s still useful to include important synonyms explicitly.)\n\nDeliver the complete search strings for **PubMed**, **Google Scholar**, **Scopus**, and **Web of Science** in a well‑structured output, each with the platform’s Boolean operators and syntax. Briefly explain how each string covers the PICO components and tailor it to the platform. Ensure the strings are efficient and comprehensive to capture relevant literature in medicine, psychology, sociology, organizational studies, economics, leadership, technology assessment, etc.\nAlways use the Google Sheet Tool to update the PicoSearches File with your Topic from {{ $json.chatInput }}, PICO Terms and  {{ $execution.id }}.\n",
+          "enableStreaming": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        -208
+      ],
+      "id": "13292391-33f8-4465-a004-0947d84e9e9f",
+      "name": "PICO-Agent",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=TASK:\n- Use PICO-based boolean queries supplied below for PubMed, Google Scholar, Scopus, and Web of Science.\n- For each source, call MCP_PAPER_SEARCH with a conservative limit (e.g., 10–15) to avoid rate limits.\n- Internally judge strict PICO relevance and keep only relevant items.\n- Merge multi-source results with de-duplication (DOI/PMID first; otherwise strong title match).\n- Optionally use WEAVIATE_RETRIEVE (topK=5..10, withMetadata=true) to re-rank the merged set; do not invent metadata.\n- Return per-source totals in results_total_per_source; if exact totals are unavailable, return approx_total_* for each source within that object (e.g., approx_total_pubmed).\n\nINPUT (PICO + platform queries):\nP = {{ $json.output.pico.population }}\nI = {{ $json.output.pico.intervention_exposure }}\nC = {{ $json.output.pico.comparison }}\nO = {{ $json.output.pico.outcome }}\n\nPUBMED_QUERY ={{ $json.output.platform_queries.pubmed.query }}\nSCHOLAR_QUERY ={{ $json.output.platform_queries.google_scholar.query }}\nSCOPUS_QUERY ={{ $json.output.platform_queries.scopus.query }}\nWOS_QUERY ={{ $json.output.platform_queries.web_of_science.query }}\n\nLIMITS:\n- pubmed_limit=120\n- scholar_limit=100\n- scopus_limit=100\n- wos_limit=100\n\nOUTPUT:\n- Exactly the schema from the system message (valid, minified JSON).\n- Only relevant results in \"results\".\n- \"classification\" must exist with potential_impact per item title (use rubric).\n- Fill runtime.tool_calls and runtime.took_ms.\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a professional Research Agent.\n\nSTRICT RULES:\n1) Use ONLY the provided tools (MCP_PAPER_SEARCH, WEAVIATE_RETRIEVE).\n2) NO hallucinations. If information is missing, set the field to null.\n3) OUTPUT MUST BE VALID, MINIFIED JSON matching the provided schema (see below).\n4) NO code fences, NO markdown, NO explanations.\n5) Always include URLs and DOIs/PMIDs/arXiv IDs when available.\n6) Return per-source totals as results_total_per_source. If the exact totals are unavailable, return best estimates as approx_total_* fields for each source.\n7) Authors MUST be an array of strings (e.g., [\"Last, First\", ...]).\n8) Dates MUST be ISO 8601 (YYYY-MM-DD) or null.\n9) English only.\n10) For impact/topics classification use the supplied rubric strictly.\n11) If a tool is needed, you MUST call it; do not guess.\n\nINTERNAL LLM-JUDGE (RELEVANCE FILTER):\n- Internally judge strict PICO relevance for each candidate (does it address P, I, optional C, and O?).\n- Keep ONLY relevant items in the final results array.\n- Prefer items with full metadata (url/doi/pmid/arxiv_id, year, journal, authors).\n- De-duplicate by DOI/PMID; if missing, use strong title match (case/diacritics-insensitive).\n\nTOOLS:\nNAME: MCP_PAPER_SEARCH\nWHEN TO USE: Execute keyword/boolean searches across PubMed/Scholar/Scopus/Web of Science/arXiv/bioRxiv/CrossRef/medRxiv/IACR/Semantic Scholar via the MCP server.\nINPUT: { \"query\": \"string\", \"limit\": number }\nOUTPUT (array): [\n  {\"title\":\"string\",\"abstract\":\"string|null\",\"url\":\"string|null\",\"doi\":\"string|null\",\"pmid\":\"string|null\",\"arxiv_id\":\"string|null\",\"year\":2024,\"journal\":\"string|null\",\"authors\":[\"string\"],\"categories\":[\"string\"],\"published\":\"YYYY-MM-DD|null\"}\n]\nNOTES: Return at most `limit`. Do not synthesize missing fields.\n\nNAME: WEAVIATE_RETRIEVE\nWHEN TO USE: Retrieve top-k similar documents (re-ranking) using embedding similarity search.\nINPUT: { \"text\": \"string\", \"topK\": number, \"withMetadata\": true }\nOUTPUT (array): [\n  {\"id\":\"string\",\"score\":number,\"properties\":{\"title\":\"string\",\"abstract\":\"string|null\",\"url\":\"string|null\",\"doi\":\"string|null\",\"pmid\":\"string|null\",\"arxiv_id\":\"string|null\",\"year\":2024,\"journal\":\"string|null\",\"authors\":[\"string\"],\"categories\":[\"string\"],\"published\":\"YYYY-MM-DD|null\",\"primary_topic\":\"string|null\",\"secondary_topics\":[\"string\"],\"potential_impact\":number}}\n]\nNOTES: Always request withMetadata=true. Do not invent metadata.\n\nIMPACT RUBRIC (potential_impact: integer 1..5):\n1: minimal/no new info; limited results.\n2: minor incremental contribution; limited novelty.\n3: solid contribution/useful results; not groundbreaking.\n4: significant advance/novel approach; likely field influence.\n5: potential game-changer/paradigm shift/new directions.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1312,
+        -224
+      ],
+      "id": "a8e334a0-b242-44ae-84ef-b0e8c74e9fbe",
+      "name": "Research-Agent",
+      "retryOnFail": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"topic\": \"Students AND AI AND Leadership\",\n  \"pico\": {\n    \"population\": {\n      \"label\": \"Students\",\n      \"mesh\": [\"Students[MeSH]\", \"Schools[MeSH]\", \"Higher Education[MeSH]\", \"Adolescent[MeSH]\"],\n      \"text_words\": [\"student*\", \"pupil*\", \"schoolchild*\", \"undergrad*\", \"graduate*\", \"postgraduate\", \"higher education\"]\n    },\n    \"intervention_exposure\": {\n      \"label\": \"Artificial Intelligence\",\n      \"mesh\": [\"Artificial Intelligence[MeSH]\", \"Machine Learning[MeSH]\", \"Deep Learning[MeSH]\", \"Natural Language Processing[MeSH]\"],\n      \"text_words\": [\"artificial intelligence\", \"AI\", \"machine learning\", \"deep learning\", \"neural network*\", \"generative AI\", \"ChatGPT\"]\n    },\n    \"comparison\": null,\n    \"outcome\": {\n      \"label\": \"Leadership\",\n      \"mesh\": [\"Leadership[MeSH]\", \"Leadership, Educational[MeSH]\", \"Organizational Leadership[MeSH]\"],\n      \"text_words\": [\"leadership\", \"leadership development\", \"leadership skills\", \"leadership style\", \"management\", \"leader behavio*\"]\n    }\n  },\n  \"exclusions\": {\n    \"non_human\": true,\n    \"terms\": [\"mouse\", \"rat\", \"murine\", \"animal*\", \"Animals[MeSH] NOT Humans[MeSH]\"]\n  },\n  \"platform_queries\": {\n    \"pubmed\": {\n      \"scope\": \"MeSH + TIAB; exclude animal-only\",\n      \"query\": \"( (\\\"Students\\\"[MeSH] OR \\\"Schools\\\"[MeSH] OR \\\"Higher Education\\\"[MeSH] OR \\\"Adolescent\\\"[MeSH] OR student*[TIAB] OR pupil*[TIAB] OR schoolchild*[TIAB] OR undergrad*[TIAB] OR graduate*[TIAB] OR postgraduate[TIAB] OR \\\"higher education\\\"[TIAB]) ) AND ( (\\\"Artificial Intelligence\\\"[MeSH] OR \\\"Machine Learning\\\"[MeSH] OR \\\"Deep Learning\\\"[MeSH] OR \\\"Natural Language Processing\\\"[MeSH] OR \\\"artificial intelligence\\\"[TIAB] OR AI[TIAB] OR \\\"machine learning\\\"[TIAB] OR \\\"deep learning\\\"[TIAB] OR \\\"neural network*\\\"[TIAB] OR \\\"generative AI\\\"[TIAB] OR ChatGPT[TIAB]) ) AND ( (\\\"Leadership\\\"[MeSH] OR \\\"Leadership, Educational\\\"[MeSH] OR \\\"Organizational Leadership\\\"[MeSH] OR leadership[TIAB] OR \\\"leadership development\\\"[TIAB] OR \\\"leadership skills\\\"[TIAB] OR \\\"leadership style\\\"[TIAB] OR management[TIAB] OR \\\"leader behavio*\\\"[TIAB]) ) AND NOT ( \\\"Animals\\\"[MeSH] NOT \\\"Humans\\\"[MeSH] )\"\n    },\n    \"google_scholar\": {\n      \"scope\": \"Title/Abstract/Full text; minus-exclude animals\",\n      \"query\": \"(student* OR pupil* OR schoolchild* OR undergrad* OR graduate* OR postgraduate) (\\\"artificial intelligence\\\" OR AI OR \\\"machine learning\\\" OR \\\"deep learning\\\" OR \\\"neural network\\\" OR \\\"generative AI\\\" OR ChatGPT) (leadership OR \\\"leadership development\\\" OR \\\"leadership skills\\\" OR \\\"leadership style\\\" OR management OR \\\"leader behavior\\\") -mouse -rat -animal\"\n    },\n    \"scopus\": {\n      \"scope\": \"TITLE-ABS-KEY; exclude animals\",\n      \"query\": \"TITLE-ABS-KEY( (student* OR pupil* OR schoolchild* OR undergrad* OR graduate* OR postgraduate) AND (\\\"artificial intelligence\\\" OR AI OR \\\"machine learning\\\" OR \\\"deep learning\\\" OR \\\"neural network*\\\" OR \\\"generative AI\\\" OR ChatGPT) AND (leadership OR \\\"leadership development\\\" OR \\\"leadership skills\\\" OR \\\"leadership style\\\" OR management OR \\\"leader behavio*\\\") ) AND NOT TITLE-ABS-KEY(mouse OR rat OR murine OR animal*)\"\n    },\n    \"web_of_science\": {\n      \"scope\": \"TS=Topic; exclude animals\",\n      \"query\": \"TS=( (student* OR pupil* OR schoolchild* OR undergrad* OR graduate* OR postgraduate) AND (\\\"artificial intelligence\\\" OR AI OR \\\"machine learning\\\" OR \\\"deep learning\\\" OR \\\"neural network*\\\" OR \\\"generative AI\\\" OR ChatGPT) AND (leadership OR \\\"leadership development\\\" OR \\\"leadership skills\\\" OR \\\"leadership style\\\" OR management OR \\\"leader behavio*\\\") ) NOT TS=(mouse OR rat OR murine OR animal*)\"\n    }\n  },\n  \"results_total_per_source\": [\n    {\n      \"pubmed_results\": 0,\n      \"scopus_results\": 0,\n      \"WoS_results\": 0,\n      \"scholar_results\": 0,\n      \"approx_pubmed_results\": 0,\n      \"approx_scopus_results\": 0,\n      \"approx_WoS_results\": 0,\n      \"approx_scholar_results\": 0\n    }\n  ],\n  \"notes\": {\n    \"logic\": \"OR within concepts; AND across P, I/E, O; exclude animal-only studies.\",\n    \"wildcards\": \"* covers plurals/variants; phrase quotes force exact phrases.\",\n    \"language\": \"English\",\n    \"comparison\": \"None specified\"\n  },\n  \"metadata\": {\n    \"created_at\": \"2025-10-21\",\n    \"version\": \"1.0\",\n    \"author\": \"structured-by-chatgpt\"\n  }\n}\n",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        656,
+        16
+      ],
+      "id": "6c0f18ed-143b-42a0-a970-42169994619a",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "mode": "jsonToxml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        2368,
+        -432
+      ],
+      "id": "afec8a66-b3fb-4f61-b78f-c1899d4ecdf8",
+      "name": "XML1"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "nileneb",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "research-bot",
+          "mode": "list",
+          "cachedResultName": "research-bot",
+          "cachedResultUrl": "https://github.com/Nileneb/research-bot"
+        },
+        "filePath": "=downloads/ {{ $execution.id }}/Pico.md",
+        "fileContent": "={{ $json.data }}",
+        "commitMessage": "xml-upload"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        864,
+        -592
+      ],
+      "id": "fa7e192c-b197-433d-acc7-e152ca25eed4",
+      "name": "Create a file1",
+      "webhookId": "d53b7bd4-377a-4b5e-9739-7f7dac22c192",
+      "credentials": {
+        "githubApi": {
+          "id": "xhLM7Wn2DRUIXuzP",
+          "name": "GitHub account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1328,
+        -896
+      ],
+      "id": "044f0f28-a1de-407d-892e-21c542d04ccb",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "content": "**USER-INTRACTION**",
+        "width": 656
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        544,
+        -608
+      ],
+      "typeVersion": 1,
+      "id": "682cbea0-7bae-4c8d-becc-ea21a55e0ced",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "**USER-INTRACTION**",
+        "height": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -128,
+        -432
+      ],
+      "typeVersion": 1,
+      "id": "ec110a8b-6116-49be-80f0-339da606a680",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "weaviateCollection": {
+          "__rl": true,
+          "value": "Research",
+          "mode": "list",
+          "cachedResultName": "Research"
+        },
+        "includeDocumentMetadata": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+      "typeVersion": 1.3,
+      "position": [
+        1632,
+        16
+      ],
+      "id": "f4ede3a8-4da0-4f1f-90c3-5e4995ea57fc",
+      "name": "Weaviate Vector Store1",
+      "credentials": {
+        "weaviateApi": {
+          "id": "tpJ1qo6cemOqvLOd",
+          "name": "Weaviate Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5a07c8d2-4aa7-4eb1-8642-43580e83176b",
+              "name": "pubmed.query",
+              "value": "={{ $json.scope }}: {{ $json.query }}",
+              "type": "string"
+            },
+            {
+              "id": "374bd3cf-d3fc-47d1-aab0-cb14de65ef72",
+              "name": "google_scholar.query",
+              "value": "={{ $json.scope }}:{{ $json.query }}",
+              "type": "string"
+            },
+            {
+              "id": "d61a2b39-05a6-468e-bd37-dd718719901a",
+              "name": "scopus.query",
+              "value": "={{ $json.scope }}:{{ $json.query }}",
+              "type": "string"
+            },
+            {
+              "id": "f358d218-fd93-44a2-8dbc-26d666a10f48",
+              "name": "webofscience.query",
+              "value": "={{ $json.scope }}:{{ $json.query }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        -880
+      ],
+      "id": "9d70a5f3-9989-49da-9bec-c9f373fa05ac",
+      "name": "Remove Fields"
+    },
+    {
+      "parameters": {
+        "operation": "removeItemsSeenInPreviousExecutions",
+        "dedupeValue": "_dedupeKey",
+        "options": {}
+      },
+      "id": "68f4dd74-38e8-4367-9905-9eee998d5b04",
+      "name": "Remove Duplicates",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "position": [
+        2448,
+        -720
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "=results",
+        "options": {}
+      },
+      "id": "fad2ca6e-1e96-4ac6-b457-a776115cd404",
+      "name": "Split Results",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        2048,
+        -720
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bd542bdd-d919-4688-a34d-395dd003e832",
+              "name": "results",
+              "type": "string",
+              "value": "={{ $json.output.results }}"
+            },
+            {
+              "id": "813730e9-5214-419b-a583-04ee9bbc57ec",
+              "name": "output.results_total_per_source",
+              "value": "={{ $json.output.results_total_per_source }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "72ba4310-3273-43b2-ada9-1858b205c746",
+      "name": "Extract Fields",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1616,
+        -320
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        -1184
+      ],
+      "id": "64158d25-308c-4494-83eb-c5a60e776559",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.platform_queries",
+        "options": {}
+      },
+      "id": "db70d7d8-37d7-49bb-8911-4225f3447ae4",
+      "name": "Split Results1",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        464,
+        -880
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2985bf6e-d26f-4462-a3b1-a6a47ec913ea",
+              "name": "pubmed.query",
+              "value": "={{ $json.output.pubmed.query }}",
+              "type": "string"
+            },
+            {
+              "id": "6c9e07e1-5bee-4524-bf85-9d70cbf0955d",
+              "name": "google_scholar.query",
+              "value": "={{ $json.output.google_scholar.query }}",
+              "type": "string"
+            },
+            {
+              "id": "45ead3b4-0e17-4d21-8f70-ef7a294d5250",
+              "name": "scopus.query",
+              "value": "={{ $json.output.scopus.query }}",
+              "type": "string"
+            },
+            {
+              "id": "95592d1b-8d72-45ab-af63-0eada140d158",
+              "name": "web_of_science.query",
+              "value": "={{ $json.output.web_of_science.query }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8e316893-508f-4dba-bcee-92d33286539d",
+      "name": "Extract Fields1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        288,
+        -976
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "Nileneb",
+          "mode": "list",
+          "cachedResultName": "Nileneb",
+          "cachedResultUrl": "https://github.com/Nileneb"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "research-bot",
+          "mode": "list",
+          "cachedResultName": "research-bot",
+          "cachedResultUrl": "https://github.com/Nileneb/research-bot"
+        },
+        "filePath": "=downloads/ {{ $execution.id }}/results.md",
+        "fileContent": "={{ $('XML1').item.json.data }}",
+        "commitMessage": "XML-Edit"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        2384,
+        -64
+      ],
+      "id": "33c9ac51-a297-415a-aab0-2c1c845d3580",
+      "name": "Edit a file",
+      "webhookId": "353b989f-e13f-4b96-8721-ea60a12747cd",
+      "credentials": {
+        "githubApi": {
+          "id": "xhLM7Wn2DRUIXuzP",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=0&term={{$json.pubmed.query}}\n",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -480,
+        -1200
+      ],
+      "id": "343893a9-0364-428d-bc91-03d42e3ec78a",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const c=$json.hits_pubmed||0; let bucket=\"good\", score=90;\nif(c===0){bucket=\"zero\";score=10;}\nelse if(c<10){bucket=\"low\";score=40;}\nelse if(c<=50){bucket=\"good\";score=90;}\nelse if(c<=1000){bucket=\"high\";score=60;}\nelse {bucket=\"too_high\";score=30;}\nreturn [{hits_bucket:bucket, bucket_score:score}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -432,
+        -736
+      ],
+      "id": "5aadc8f5-a4ed-47a3-b1ff-268f183950dc",
+      "name": "Hits Bucket"
+    },
+    {
+      "parameters": {
+        "url": "=https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi   ?db=pubmed&retmode=json&retmax=30&sort=relevance&term={{$json.pubmed.query}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -192,
+        -752
+      ],
+      "id": "d5a2c9f4-1e2f-4feb-9882-44f1190d6049",
+      "name": "PubMed Sample IDs"
+    },
+    {
+      "parameters": {
+        "jsCode": "const ids=$json.esearchresult?.idlist||[];\nreturn [{ pmids: ids }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -752
+      ],
+      "id": "c36874c2-d21f-482e-9bfe-469cef0dedb5",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "url": "=https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi   ?db=pubmed&retmode=xml&id={{$json.pmids.join(',')}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        224,
+        -752
+      ],
+      "id": "6332f683-a39d-4446-b2a0-880b774208fa",
+      "name": "PubMed Summaries"
+    },
+    {
+      "parameters": {
+        "jsCode": "const xml = $json; const text = typeof xml==='string'? xml : JSON.stringify(xml);\nconst items=[]; const blocks=text.split(\"<PubmedArticle>\").slice(1);\nfor(const b of blocks){\n  const id=(b.match(/<PMID[^>]*>(\\d+)<\\/PMID>/)||[])[1];\n  const title=(b.match(/<ArticleTitle>([\\s\\S]*?)<\\/ArticleTitle>/)||[])[1]||\"\";\n  const abst=(b.match(/<AbstractText[^>]*>([\\s\\S]*?)<\\/AbstractText>/)||[])[1]||\"\";\n  if(id) items.push({pmid:id, title:title.replace(/<[^>]+>/g,''), abstract:abst.replace(/<[^>]+>/g,'')});\n}\nreturn items.slice(0,30);\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        -752
+      ],
+      "id": "62eab936-98e4-48df-8291-05682f51eaf4",
+      "name": "Parse EFETCH"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmOllama",
+      "typeVersion": 1,
+      "position": [
+        704,
+        240
+      ],
+      "id": "c7687f55-a10f-4aad-9af0-5ded277fa380",
+      "name": "Ollama Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "28DOcLRM9qShNtOE",
+          "name": "Ollama account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Validation",
+        "height": 720,
+        "width": 1680,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1696,
+        -1184
+      ],
+      "typeVersion": 1,
+      "id": "ca8e73ae-e9a8-4d8b-b3f0-fc9a12223d50",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ---- helpers (kein require, pure JS) ----\nfunction normalizeDoi(doiRaw) {\n  if (!doiRaw) return null;\n  let d = String(doiRaw).trim().toLowerCase();\n  d = d.replace(/^https?:\\/\\/(dx\\.)?doi\\.org\\//, \"\");\n  d = d.replace(/^doi:\\s*/, \"\");\n  return d || null;\n}\n\nfunction normalizeTitle(titleRaw) {\n  return String(titleRaw || \"\")\n    .normalize(\"NFKD\").replace(/[\\u0300-\\u036f]/g, \"\")\n    .toLowerCase()\n    .replace(/[^a-z0-9 ]/g, \" \")\n    .replace(/\\s+/g, \" \")\n    .trim();\n}\n\nfunction safeStr(x){ return (x == null ? null : String(x).trim()); }\n\n// FNV-1a 32-bit Hash -> 8-stellige Hex (stabil, ohne crypto)\nfunction fnv1a(str) {\n  let h = 0x811c9dc5;\n  for (let i = 0; i < str.length; i++) {\n    h ^= str.charCodeAt(i);\n    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;\n  }\n  return (\"0000000\" + h.toString(16)).slice(-8);\n}\n\n// ---- main ----\nconst items = $input.all(); // [{json,...}, ...]\n\nreturn items.map(({ json, binary }) => {\n  const doi   = normalizeDoi(json.doi);\n  const pmid  = safeStr(json.pmid);\n  const title = normalizeTitle(json.title);\n  const year  = safeStr(json.year);\n  const firstAuthor = Array.isArray(json.authors) && json.authors.length\n    ? String(json.authors[0]).toLowerCase().replace(/\\s+/g, \" \").trim()\n    : \"\";\n\n  let key, source;\n\n  if (doi) { key = `doi:${doi}`; source = \"doi\"; }\n  else if (pmid) { key = `pmid:${pmid}`; source = \"pmid\"; }\n  else if (title) {\n    // Titel-basiert + etwas Kontext für Stabilität\n    key = `t:${title}${year ? `:${year}` : \"\"}${firstAuthor ? `:${firstAuthor}` : \"\"}`;\n    source = \"title\";\n  } else {\n    // letzter Fallback: kompakter FNV-Hash über das gesamte Item\n    const raw = JSON.stringify(json);\n    key = `h:${fnv1a(raw)}`;\n    source = \"hash\";\n  }\n\n  return {\n    json: { ...json, dedupeKey: key, dedupeKeySource: source },\n    binary\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        -720
+      ],
+      "id": "ad6e73b1-b29d-4eb9-9aaf-d11dd0480ce1",
+      "name": "Make DedupeKey"
+    },
+    {
+      "parameters": {
+        "formTitle": "Get the Newsletter",
+        "formDescription": "When you put in your Email to the Form, we will send you a wonderfull Newsletter, with exciting Research and Product Updates.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Your Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Newsletter Abonnement",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes, I want to get the Newsletter."
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -432,
+        528
+      ],
+      "id": "45f7aa85-64ab-4447-b0c9-80ea836d5bdb",
+      "name": "On form submission",
+      "webhookId": "6269d4ed-e217-4140-9da7-0de6b0cf742e"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/16iotZC_v4KWHnZhDksOsF2HfkBv8ojnFnYYCqpjAm8I/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Tabellenblatt1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16iotZC_v4KWHnZhDksOsF2HfkBv8ojnFnYYCqpjAm8I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "Your Email"
+          ],
+          "schema": [
+            {
+              "id": "Your Email",
+              "displayName": "Your Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Newsletter Abonnement",
+              "displayName": "Newsletter Abonnement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -224,
+        528
+      ],
+      "id": "0cee6dff-a2c7-402e-a114-8d97ad86de29",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "M3mCBtFhMGeBreRM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "NEwsletter Form Submission\n\nTODO:\n- Email-Verifikation\n- Sign Out Posibilty",
+        "height": 304,
+        "width": 752,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -656,
+        416
+      ],
+      "typeVersion": 1,
+      "id": "f387e437-7ff6-4366-bc7b-46610438679a",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "53d3ed9b-06dc-4ff5-b366-4112c0d32db1",
+              "leftValue": "={{ $json.output.results_total_per_source.pubmed }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "70879250-0ee5-4d37-885f-81492e9bf1ad",
+              "leftValue": "={{ $json.output.results_total_per_source.scholar }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "efa4fee2-ace4-49e9-a604-c2df83874341",
+              "leftValue": "={{ $json.output.results_total_per_source.scopus }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "4d51dcff-ab86-4af4-b458-1019a340d407",
+              "leftValue": "={{ $json.output.results_total_per_source.wos }}{{ $json.output.results_total_per_source.medrxiv }}{{ $json.output.results_total_per_source.biorxiv }}",
+              "rightValue": 50,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "42e5f5a9-616d-4b1d-8abc-01f1d78d7a84",
+              "leftValue": "={{ $json.output.results_total_per_source.pubmed }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "eb26f1e6-82b1-443a-bd23-dc507761bbf1",
+              "leftValue": "={{ $json.output.results_total_per_source.scholar }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "130ea873-5d17-4b96-9369-78cacb43ac92",
+              "leftValue": "={{ $json.output.results_total_per_source.scopus }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "3fdf9230-0447-466d-b99e-c10b75bc8b50",
+              "leftValue": "={{ $json.output.results_total_per_source.wos }}{{ $json.output.results_total_per_source.medrxiv }}{{ $json.output.results_total_per_source.biorxiv }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1920,
+        -352
+      ],
+      "id": "bf103b11-e148-4cb0-9ef7-798c660ee166",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "62a57e5b-78b9-4dac-abfb-d765316f98ca",
+              "name": "$execution.id",
+              "value": "={{ $execution.id }}+A",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        -1120
+      ],
+      "id": "ecf873d9-85bd-4907-954b-85ae77f11952",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2208,
+        176
+      ],
+      "id": "e371cc74-f07e-48b7-b5dd-81adf11d1adf",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "nkMB0IuuWe69Mlpn",
+          "name": "benediktov api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0",
+          "mode": "list",
+          "cachedResultName": "PicoSearches",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Searchterms",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "execution_ID": "={{ $execution.id }}",
+            "Topic": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Topic', ``, 'string') }}",
+            "approx_total_pubmed": "=",
+            "approx_total_scholar": "=",
+            "approx_total_scopus": "=",
+            "approx_total_wos": "=",
+            "Pico": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Pico', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "execution_ID"
+          ],
+          "schema": [
+            {
+              "id": "execution_ID",
+              "displayName": "execution_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Pico",
+              "displayName": "Pico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "plattform_queries",
+              "displayName": "plattform_queries",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "approx_total_pubmed",
+              "displayName": "approx_total_pubmed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "approx_total_scholar",
+              "displayName": "approx_total_scholar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "approx_total_scopus",
+              "displayName": "approx_total_scopus",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "approx_total_wos",
+              "displayName": "approx_total_wos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        544,
+        16
+      ],
+      "id": "ae8f2a62-df91-4569-b29d-6c9e21bb94ba",
+      "name": "Append or update row in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "M3mCBtFhMGeBreRM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "paper-task",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "d53ceebf-a0d3-4b91-a4b0-b777baa2480b",
+      "name": "GET /paper-task",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        2272,
+        -1008
+      ],
+      "webhookId": "159625aa-298b-4691-be91-9a1e7d1ff5d3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "paper_url",
+              "type": "string",
+              "value": "={{$json.query.paper_url || 'https://arxiv.org/pdf/1706.03762.pdf'}}"
+            },
+            {
+              "name": "question",
+              "type": "string",
+              "value": "Classify the study on the evidence hierarchy (qualitative, quantitative, survey, observational cohort/case-control, diagnostic accuracy, quasi-experimental, randomized controlled trial, systematic review/meta-analysis). Return strict JSON."
+            },
+            {
+              "name": "schema",
+              "type": "object",
+              "value": "={\"type\":\"object\",\"required\":[\"paper_url\",\"design\",\"level\",\"rationale\"],\"properties\":{\"paper_url\":{\"type\":\"string\"},\"design\":{\"type\":\"string\",\"enum\":[\"qualitative\",\"quantitative\",\"survey\",\"observational_cohort\",\"observational_case_control\",\"diagnostic_accuracy\",\"quasi_experimental\",\"rct\",\"systematic_review\",\"meta_analysis\"]},\"level\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":5},\"rationale\":{\"type\":\"string\"}}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "91c77f7e-8f2d-4599-93fd-94435dc22eda",
+      "name": "Build Task Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2768,
+        -1008
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "745f69a8-7700-4d7a-8d9e-ed610c9d084b",
+      "name": "Respond Task",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        3024,
+        -1008
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "paper-result",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "9919896e-de78-48c0-b3f9-819fd2828cd9",
+      "name": "POST /paper-result",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        2272,
+        -1184
+      ],
+      "webhookId": "9ece3a67-5d29-41ab-ba7c-edaab1d9d914"
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {
+          "fileName": "={{'paper_result_' + (Date.now()) + '.json'}}"
+        }
+      },
+      "id": "e401e30e-cbc8-4209-9b60-393ff2e2c6e7",
+      "name": "Result to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        2560,
+        -1184
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "nileneb",
+          "mode": ""
+        },
+        "repository": {
+          "__rl": true,
+          "value": "research-bot",
+          "mode": "list",
+          "cachedResultName": "research-bot",
+          "cachedResultUrl": "https://github.com/Nileneb/research-bot"
+        },
+        "filePath": "=uploads/paper-results/{{$binary.data.fileName}}",
+        "binaryData": true,
+        "commitMessage": "paper result upload"
+      },
+      "id": "064549bc-ac39-487b-a0a9-23a567597532",
+      "name": "Save Result File (optional GitHub)",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        2816,
+        -1184
+      ],
+      "webhookId": "b7437538-674b-46ac-933d-c6a7dcbbaa13",
+      "credentials": {
+        "githubApi": {
+          "id": "xhLM7Wn2DRUIXuzP",
+          "name": "GitHub account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "9d631581-1e0d-41c4-ade5-cdeac65b259f",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        3072,
+        -1184
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0",
+          "mode": "list",
+          "cachedResultName": "PicoSearches",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Searchterms",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        96
+      ],
+      "id": "8e8cf692-410f-480b-ae77-ed1342e9c364",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "M3mCBtFhMGeBreRM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0",
+          "mode": "list",
+          "cachedResultName": "PicoSearches",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Searchterms",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "execution_ID": "={{ $execution.id }}",
+            "approx_total_pubmed": "={{ $json.output.results_total_per_source.pubmed }}",
+            "approx_total_scholar": "={{ $json.output.results_total_per_source.scholar }}",
+            "approx_total_scopus": "={{ $json.output.results_total_per_source.scopus }}",
+            "approx_total_wos": "={{ $json.output.results_total_per_source.wos }}",
+            "Topic": "=",
+            "Pico": "=",
+            "approx_total_medrxiv": "={{ $json.output.results_total_per_source.medrxiv }}",
+            "approx_total_biorxiv": "={{ $json.output.results_total_per_source.biorxiv }}"
+          },
+          "matchingColumns": [
+            "execution_ID"
+          ],
+          "schema": [
+            {
+              "id": "execution_ID",
+              "displayName": "execution_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pico",
+              "displayName": "Pico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "plattform_queries",
+              "displayName": "plattform_queries",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approx_total_pubmed",
+              "displayName": "approx_total_pubmed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approx_total_scholar",
+              "displayName": "approx_total_scholar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approx_total_scopus",
+              "displayName": "approx_total_scopus",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approx_total_wos",
+              "displayName": "approx_total_wos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "approx_total_medrxiv",
+              "displayName": "approx_total_medrxiv",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "approx_total_biorxiv",
+              "displayName": "approx_total_biorxiv",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "RAW"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1776,
+        -544
+      ],
+      "id": "b249a253-a868-4b96-900b-8965b254f75b",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "M3mCBtFhMGeBreRM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        928,
+        -112
+      ],
+      "id": "b6b75430-f98a-422d-af59-f3da60d2679a",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "Nileneb",
+          "mode": "list",
+          "cachedResultName": "Nileneb",
+          "cachedResultUrl": "https://github.com/Nileneb"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "research-bot",
+          "mode": "list",
+          "cachedResultName": "research-bot",
+          "cachedResultUrl": "https://github.com/Nileneb/research-bot"
+        },
+        "filePath": "=downloads/ {{ $execution.id }}/Pico.md",
+        "fileContent": "={{ $json.data }}",
+        "commitMessage": "XML-Edit"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1104,
+        -528
+      ],
+      "id": "53b0c751-2ba8-40fd-99c6-ebcc0930a528",
+      "name": "Edit a file1",
+      "webhookId": "353b989f-e13f-4b96-8721-ea60a12747cd",
+      "credentials": {
+        "githubApi": {
+          "id": "xhLM7Wn2DRUIXuzP",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0",
+          "mode": "list",
+          "cachedResultName": "PicoSearches",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1159114928,
+          "mode": "list",
+          "cachedResultName": "Results",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jSKtCGHcqS3EB7Uz45JKEOUkL_0eDqRGpHp1u0I4HN0/edit#gid=1159114928"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "execution_id": "={{ $execution.id }}",
+            "title": "",
+            "doi": "",
+            "pmid": "",
+            "year": "",
+            "journal": "",
+            "url": ""
+          },
+          "matchingColumns": [
+            "execution_ID"
+          ],
+          "schema": [
+            {
+              "id": "execution_id",
+              "displayName": "execution_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "doi",
+              "displayName": "doi",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pmid",
+              "displayName": "pmid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "year",
+              "displayName": "year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "journal",
+              "displayName": "journal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "potential_impact",
+              "displayName": "potential_impact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "source_query_pubmed\n",
+              "displayName": "source_query_pubmed\n",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "RAW"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2704,
+        -816
+      ],
+      "id": "bcb61843-20b8-4828-99bc-6c22e955af7b",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "M3mCBtFhMGeBreRM",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "PICO-Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "PICO-Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "Research-Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weaviate Vector Store": {
+      "ai_tool": [
+        []
+      ],
+      "main": [
+        []
+      ]
+    },
+    "GitHub Document Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Weaviate Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Research-Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        [
+          {
+            "node": "Create a file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Research-Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a file": {
+      "main": [
+        [
+          {
+            "node": "Weaviate Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PICO-Agent": {
+      "main": [
+        [
+          {
+            "node": "Research-Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research-Agent": {
+      "main": [
+        [
+          {
+            "node": "Extract Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "PICO-Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML1": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a file1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit a file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weaviate Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Research-Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "XML1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Results": {
+      "main": [
+        [
+          {
+            "node": "Make DedupeKey",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        []
+      ]
+    },
+    "Extract Fields1": {
+      "main": [
+        []
+      ]
+    },
+    "Split Results1": {
+      "main": [
+        [
+          {
+            "node": "Remove Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit a file": {
+      "main": [
+        [
+          {
+            "node": "Weaviate Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "Hits Bucket": {
+      "main": [
+        []
+      ]
+    },
+    "PubMed Sample IDs": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "PubMed Summaries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PubMed Summaries": {
+      "main": [
+        [
+          {
+            "node": "Parse EFETCH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Make DedupeKey": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Split Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Weaviate Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Weaviate Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "PICO-Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET /paper-task": {
+      "main": [
+        [
+          {
+            "node": "Build Task Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Task Payload": {
+      "main": [
+        [
+          {
+            "node": "Respond Task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "POST /paper-result": {
+      "main": [
+        [
+          {
+            "node": "Result to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Result to File": {
+      "main": [
+        [
+          {
+            "node": "Save Result File (optional GitHub)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Result File (optional GitHub)": {
+      "main": [
+        [
+          {
+            "node": "Respond OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "PICO-Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "PICO-Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "PICO-Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit a file1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7ab9710e-3874-4079-8dac-b3fe8310d90b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6359399b922ce3c37bbd24d95b1466edf1eef82d9465bb6b28a9ae9a9a4bbe08"
+  },
+  "id": "bbezifzdcx8uXO9Y",
+  "tags": []
+}
